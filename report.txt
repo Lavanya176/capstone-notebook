@@ -1,0 +1,86 @@
+Introduction
+
+In this project we will try to find an optimal location for a restaurant. Specifically, this report will be targeted to stakeholders interested in opening an Italian 
+restaurant in Berlin, Germany.
+
+Since there are lots of restaurants in Berlin we will try to detect locations that are not already crowded with restaurants. We are also particularly interested in 
+areas with no Italian restaurants in vicinity. We would also prefer locations as close to city center as possible, assuming that first two conditions are met.
+
+We will use our data science powers to generate a few most promissing neighborhoods based on this criteria. Advantages of each area will then be clearly 
+expressed so that best possible final location can be chosen by stakeholders.
+
+Data
+
+Based on definition of our problem, factors that will influence our decission are:
+
+number of existing restaurants in the neighborhood (any type of restaurant)
+number of and distance to Italian restaurants in the neighborhood, if any
+distance of neighborhood from city center
+We decided to use regularly spaced grid of locations, centered around city center, to define our neighborhoods.
+
+Following data sources will be needed to extract/generate the required information:
+
+centers of candidate areas will be generated algorithmically and approximate addresses of centers of those areas will be obtained using Google Maps API reverse 
+geocoding
+number of restaurants and their type and location in every neighborhood will be obtained using Foursquare API
+coordinate of Berlin center will be obtained using Google Maps API geocoding of well known Berlin location (Alexanderplatz)
+
+Methodology
+
+In this project we will direct our efforts on detecting areas of Berlin that have low restaurant density, particularly those with low number of Italian restaurants. 
+We will limit our analysis to area ~6km around city center.
+
+In first step we have collected the required data: location and type (category) of every restaurant within 6km from Berlin center (Alexanderplatz). We have also 
+identified Italian restaurants (according to Foursquare categorization).
+
+Second step in our analysis will be calculation and exploration of 'restaurant density' across different areas of Berlin - we will use heatmaps to identify a few
+ promising areas close to center with low number of restaurants in general (and no Italian restaurants in vicinity) and focus our attention on those areas.
+
+In third and final step we will focus on most promising areas and within those create clusters of locations that meet some basic requirements established in 
+discussion with stakeholders: we will take into consideration locations with no more than two restaurants in radius of 250 meters, and we want locations without
+ Italian restaurants in radius of 400 meters. We will present map of all such locations but also create clusters (using k-means clustering) of those locations to 
+identify general zones / neighborhoods / addresses which should be a starting point for final 'street level' exploration and search for optimal venue location by 
+stakeholders.
+
+Results&Discussion
+
+Our analysis shows that although there is a great number of restaurants in Berlin (~2000 in our initial area of interest which was 12x12km around Alexanderplatz),
+ there are pockets of low restaurant density fairly close to city center. Highest concentration of restaurants was detected north and west from Alexanderplatz, so 
+we focused our attention to areas south, south-east and east, corresponding to boroughs Kreuzberg, Friedrichshain and south-east corner of central Mitte borough.
+ Another borough was identified as potentially interesting (Prenzlauer Berg, north-east from Alexanderplatz), but our attention was focused on Kreuzberg and 
+Friedrichshain which offer a combination of popularity among tourists, closeness to city center, strong socio-economic dynamics and a number of pockets of low 
+restaurant density.
+
+After directing our attention to this more narrow area of interest (covering approx. 5x5km south-east from Alexanderplatz) we first created a dense grid of 
+location candidates (spaced 100m appart); those locations were then filtered so that those with more than two restaurants in radius of 250m and those with an 
+Italian restaurant closer than 400m were removed.
+
+Those location candidates were then clustered to create zones of interest which contain greatest number of location candidates. Addresses of centers of those 
+zones were also generated using reverse geocoding to be used as markers/starting points for more detailed local analysis based on other factors.
+
+Result of all this is 15 zones containing largest number of potential new restaurant locations based on number of and distance to existing venues - both restaurants 
+in general and Italian restaurants particularly. This, of course, does not imply that those zones are actually optimal locations for a new restaurant! Purpose of this 
+analysis was to only provide info on areas close to Berlin center but not crowded with existing restaurants (particularly Italian) - it is entirely possible that there is 
+a very good reason for small number of restaurants in any of those areas, reasons which would make them unsuitable for a new restaurant regardless of lack of 
+competition in the area. Recommended zones should therefore be considered only as a starting point for more detailed analysis which could eventually result in 
+location which has not only no nearby competition but also other factors taken into account and all other relevant conditions met.
+
+Conclusion
+
+Purpose of this project was to identify Berlin areas close to center with low number of restaurants (particularly Italian restaurants) in order to aid stakeholders in 
+narrowing down the search for optimal location for a new Italian restaurant. By calculating restaurant density distribution from Foursquare data we have first 
+identified general boroughs that justify further analysis (Kreuzberg and Friedrichshain), and then generated extensive collection of locations which satisfy some 
+basic requirements regarding existing nearby restaurants. Clustering of those locations was then performed in order to create major zones of interest (containing 
+greatest number of potential locations) and addresses of those zone centers were created to be used as starting points for final exploration by stakeholders.
+
+Final decission on optimal restaurant location will be made by stakeholders based on specific characteristics of neighborhoods and locations in every 
+recommended zone, taking into consideration additional factors like attractiveness of each location (proximity to park or water), levels of noise / proximity to 
+major roads, real estate availability, prices, social and economic dynamics of every neighborhood etc.
+
+
+
+
+
+
+
+
